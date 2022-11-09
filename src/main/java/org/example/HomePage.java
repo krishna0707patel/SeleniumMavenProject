@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 
 // It allows for date formatting (date -> text), parsing (text -> date) and normalization.
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class HomePage
@@ -116,46 +117,103 @@ public class HomePage
             System.out.println("message");
 
     }
-    //@ Test
+    //This annotated method will be run after each method
+    @Test
+    public void Product(){
+        //ClickonElement,EnterText[Reusable method called] for uniquely identify a web element with in the webpage by Id, By Classname, By Xpath
+        ClickOnElement(By.className("header-menu"));
+       ClickOnElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/computers\"]"));
+        ClickOnElement(By.xpath("//a[@title=\"Show products in category Desktops\"]"));
+
+        //regMsg,regMsg1,regMsg2is local variable to store the find element through gettext command
+
+        String product1 = driver.findElement(By.xpath("//h2[@class=\"product-title\"]/a[@href=\"/build-your-own-computer\"]")).getText();
 
 
+        String product2 = driver.findElement(By.xpath("//h2[@class=\"product-title\"]/a[@href=\"/digital-storm-vanquish-3-custom-performance-pc\"]")).getText();
 
+        String product3 = driver.findElement(By.xpath("//h2[@class=\"product-title\"]/a[@href=\"/lenovo-ideacentre-600-all-in-one-pc\"]")).getText();
 
-//                //ClickonElement,EnterText[Reusable method called] for uniquely identify a web element with in the webpage by Id, By Classname, By Xpath
-//                ClickOnElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/computers\"]"));
-//
-//                ClickOnElement(By.xpath("//div[@class=\"category-grid sub-category-grid\"]//img[@alt=\"Picture for category Desktops\"]"));
-//                //regMsg,regMsg1,regMsg2is local variable to store the find element through gettext command
-
-
-
-//                driver.findElement(By.className("header-menu")).click();
-//                driver.findElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/computers\"]")).click();
-//                driver.findElement(By.xpath("//a[@title=\"Show products in category Desktops\"]")).click();
-//
-//                String product1 = driver.findElement(By.xpath("//h2[@class=\"product-title\"]/a[@href=\"/build-your-own-computer\"]")).getText();
-//
-//
-//                String product2 = driver.findElement(By.xpath("//h2[@class=\"product-title\"]/a[@href=\"/digital-storm-vanquish-3-custom-performance-pc\"]")).getText();
-//
-//                String product3 = driver.findElement(By.xpath("//h2[@class=\"product-title\"]/a[@href=\"/lenovo-ideacentre-600-all-in-one-pc\"]")).getText();
-//
-//                //local variable item introduced to find element by .gettext command
-//                System.out.println(product1);
-//                System.out.println(product2);
-//                System.out.println(product3);
-//
-//
-
-
-
-
-
-
-
-
+        //local variable item introduced to find element
+        System.out.println(product1);
+        System.out.println(product2);
+        System.out.println(product3);
 
     }
+    //This annotated method will be run after each method
+    @Test
+    public void NewsComent(){
+
+        ClickOnElement(By.className("read-more"));
+      EnterText(By.className("enter-comment-title"),"Good shopping website");
+
+        EnterText(By.className("enter-comment-text"),("This shopping website is very good they values customer's money&feedback."));
+       ClickOnElement(By.name("add-comment"));
+
+       //local variable introduced
+        String newscomment = driver.findElement(By.className("result")).getText();
+        // to printout in console
+        System.out.println(newscomment);
+
+    }
+    //This annotated method will be run after each method
+    @Test
+    public void HomepageCategories(){
+        ClickOnElement(By.className("header-menu"));
+
+        //local variable regMsg Declared to store the value get from reusable method GettextFromElement through Xpath,Id or by Class
+        String item1 = driver.findElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/computers\"]")).getText();
+
+        String item2 = driver.findElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/electronics\"]")).getText();
+
+        String item3 = driver.findElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/apparel\"]")).getText();
+
+        String item4 = driver.findElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/digital-downloads\"]")).getText();
+
+        String item5 = driver.findElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/books\"]")).getText();
+
+        String item6 = driver.findElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/jewelry\"]")).getText();
+
+        String item7 = driver.findElement(By.xpath("//ul[@class=\"top-menu notmobile\"]/li/a[@href=\"/gift-cards\"]")).getText();
+
+        //local variable items introduced
+
+        System.out.println(item1);
+        System.out.println(item2);
+        System.out.println(item3);
+        System.out.println(item4);
+        System.out.println(item5);
+        System.out.println(item6);
+        System.out.println(item7);
+
+    }
+
+    //This annotated method will be run after each method
+    @Test
+    public void EmailAFriend(){
+
+        String timestamp = new SimpleDateFormat("yyyyMMDDHHmmss").format(new Date());
+        // printing output for timestamp
+        System.out.println(timestamp);
+
+        //ClickOnElement,EnterText[Reusable method called] for uniquely identify a web element with in the webpage by Id, By Classname, By Xpath
+
+        ClickOnElement(By.xpath("//div[@class=\"item-grid\"]//a[@href=\"/apple-macbook-pro-13-inch\"]"));
+       ClickOnElement(By.className("email-a-friend"));
+        EnterText(By.name("FriendEmail"),"ashish01"+timestamp+"@gmail.com");
+        EnterText(By.name("YourEmailAddress"),"kristy"+timestamp+"@gmail.com");
+        EnterText(By.name("PersonalMessage"),"This Macbook pro is very nice and attractive feature dear!!!!!");
+        ClickOnElement(By.name("send-email"));
+
+    //  msd is local variable to store the find element through gettextfromelement command
+        String msg = GetTextFromElement(By.xpath("//div[@class=\"message-error validation-summary-errors\"]"));
+
+        // printing output
+        System.out.println(msg);
+
+    }
+
+}
 
 
 
